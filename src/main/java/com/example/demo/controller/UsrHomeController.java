@@ -4,11 +4,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.demo.vo.Article;
+
 @Controller
-public class UserHomeController {
-	@RequestMapping("usr/home/main")
+public class UsrHomeController {
+
+	@RequestMapping("/usr/home/getArticle")
 	@ResponseBody
-	public String showMain() {
-		return "안녕!";
+	public Article getArticle() {
+		Article article = new Article(1, "제목1", "내용1");
+		return article;
 	}
+
 }
