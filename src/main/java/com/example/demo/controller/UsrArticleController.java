@@ -32,6 +32,9 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
 	public Object doModify(int id, String title, String body) {
+		System.out.println("id : " + id);
+		System.out.println("title : " + title);
+		System.out.println("body : " + body);
 
 		Article article = articleService.getArticleById(id);
 
