@@ -6,6 +6,7 @@
 
 <section class="mt-24 text-xl px-4">
 	<div class="mx-auto">
+		<div>${articlesCount }개</div>
 		<table class="table" border="1" cellspacing="0" cellpadding="5" style="width: 100%; border-collapse: collapse;">
 			<thead>
 				<tr>
@@ -32,6 +33,43 @@
 				</c:if>
 			</tbody>
 		</table>
+	</div>
+	<!-- 	동적 페이징 -->
+	<div class="pagination flex justify-center mt-3">
+		<c:set var="paginationLen" value="3" />
+		<c:set var="startPage" value="${page -  paginationLen  >= 1 ? page - paginationLen : 1}" />
+		<c:set var="endPage" value="${page +  paginationLen  <= pagesCount ? page + paginationLen : pagesCount}" />
+
+		<c:if test="${startPage > 1 }">
+			<a class="btn btn-sm" href="?page=1&boardId=${boardId }">1</a>
+
+		</c:if>
+		<c:if test="${startPage > 2 }">
+			<button class="btn btn-sm btn-disabled">...</button>
+		</c:if>
+
+		<c:forEach begin="${startPage }" end="${endPage }" var="i">
+			<a class="btn btn-sm ${param.page == i ? 'btn-active' : '' }" href="?page=${i }&boardId=${boardId}">${i }</a>
+		</c:forEach>
+		
+		<c:if test="${endPage < pagesCount - 1 }">
+			<button class="btn btn-sm btn-disabled">...</button>
+		</c:if>
+
+		<c:if test="${endPage < pagesCount }">
+			<a class="btn btn-sm" href="?page=${pagesCount }&boardId=${boardId }">${pagesCount }</a>
+		</c:if>
+	</div>
+
+
+	<!-- 	직관적인 페이징 -->
+	<div class="pagination flex justify-center mt-3">
+		<div class="btn-group">
+
+			<c:forEach begin="1" end="${pagesCount }" var="i">
+				<a class="btn btn-sm ${param.page == i ? 'btn-active':''}" href="?page=${i }&boardId=${param.boardId}">${i }</a>
+			</c:forEach>
+		</div>
 	</div>
 </section>
 
