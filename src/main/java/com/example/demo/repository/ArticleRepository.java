@@ -65,13 +65,30 @@ public interface ArticleRepository {
 				<if test="boardId != 0">
 					AND boardId = #{boardId}
 				</if>
+				<if test="searchKeyword != ''">
+					<choose>
+						<when test="searchKeywordTypeCode == 'title'">
+							AND A.title LIKE CONCAT('%', #{searchKeyword}, '%')
+						</when>
+						<when test="searchKeywordTypeCode == 'body'">
+							AND A.`body` LIKE CONCAT('%', #{searchKeyword}, '%')
+						</when>
+						<when test="searchKeywordTypeCode == 'writer'">
+							AND M.nickname LIKE CONCAT('%', #{searchKeyword}, '%')
+						</when>
+						<otherwise>
+							AND A.title LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR A.`body` LIKE CONCAT('%', #{searchKeyword}, '%')
+						</otherwise>
+					</choose>
+				</if>
 				ORDER BY A.id DESC
 				<if test="limitFrom >= 0">
 					LIMIT #{limitFrom}, #{limitTake}
 				</if>
 				</script>
 			""")
-	public List<Article> getForPrintArticles(int boardId, int limitFrom, int limitTake);
+	public List<Article> getForPrintArticles(int boardId, int limitFrom, int limitTake, String searchKeywordTypeCode, String searchKeyword);
 
 	@Select("""
 			SELECT A.* , M.nickname AS extra__writer
@@ -87,15 +104,41 @@ public interface ArticleRepository {
 
 	@Select("""
 			<script>
-				SELECT COUNT(*) AS cnt
-				FROM article
+				SELECT COUNT(*), A.*, M.nickname AS extra__writer
+				FROM article AS A
+				INNER JOIN `member` AS M
+				ON A.memberId = M.id
 				WHERE 1
 				<if test="boardId != 0">
-					AND boardId = #{boardId}
+					AND A.boardId = #{boardId}
 				</if>
-				ORDER BY id DESC;
+				<if test="searchKeyword != ''">
+					<choose>
+						<when test="searchKeywordTypeCode == 'title'">
+							AND A.title LIKE CONCAT('%', #{searchKeyword}, '%')
+						</when>
+						<when test="searchKeywordTypeCode == 'body'">
+							AND A.`body` LIKE CONCAT('%', #{searchKeyword}, '%')
+						</when>
+						<when test="searchKeywordTypeCode == 'writer'">
+							AND M.nickname LIKE CONCAT('%', #{searchKeyword}, '%')
+						</when>
+						<otherwise>
+							AND A.title LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR A.`body` LIKE CONCAT('%', #{searchKeyword}, '%')
+						</otherwise>
+					</choose>
+				</if>
+				ORDER BY A.id DESC;
 			</script>
 			""")
-	public int getArticleCount(int boardId);
+	public int getArticleCount(int boardId, String searchKeywordTypeCode, String searchKeyword);
+
+	@Update("""
+			UPDATE article
+			SET hitCount = hitCount + 1
+			WHERE id = #{id}
+			""")
+	public void increaseHitCount(int id);
 
 }
