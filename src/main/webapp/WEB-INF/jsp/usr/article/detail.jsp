@@ -18,7 +18,7 @@
 		}
 		localStorage.setItem(localStorageKey, true);
 
-		$.get('../article/doIncreaseHitCountRd', {
+		$.get('../article/doIncreaseHitCountR d', {
 			id : params.id,
 			ajaxMode : 'Y'
 		}, function(data) {
