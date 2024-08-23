@@ -48,7 +48,7 @@ INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
 title = '제목3',
-`body` = '내용3';
+`body` = '내용3'; 
 
 INSERT INTO article
 SET regDate = NOW(),

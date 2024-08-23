@@ -13,12 +13,14 @@
 <script>
 	function ArticleDetail__doIncreaseHitCount() {
 		const localStorageKey = 'article__' + params.id + '__alreadyOnView';
+
 		if (localStorage.getItem(localStorageKey)) {
 			return;
 		}
+
 		localStorage.setItem(localStorageKey, true);
 
-		$.get('../article/doIncreaseHitCountR d', {
+		$.get('../article/doIncreaseHitCountRd', {
 			id : params.id,
 			ajaxMode : 'Y'
 		}, function(data) {
@@ -59,11 +61,21 @@
 					<td style="text-align: center;">${article.extra__writer}</td>
 				</tr>
 				<tr>
+					<th style="text-align: center;">Sum</th>
+					<td style="text-align: center;">${article.extra__sumReactionPoint}</td>
+				</tr>
+				<tr>
+					<th style="text-align: center;">LIKE</th>
+					<td style="text-align: center;">${article.extra__goodReactionPoint}</td>
+				</tr>
+				<tr>
+					<th style="text-align: center;">Bad</th>
+					<td style="text-align: center;">${article.extra__badReactionPoint}</td>
+				</tr>
+				<tr>
 					<th style="text-align: center;">Views</th>
 
-					<td style="text-align: center;">
-						<span class="article-detail__hit-count">${article.hitCount}</span>
-					</td>
+					<td style="text-align: center;"><span class="article-detail__hit-count">${article.hitCount}</span></td>
 				</tr>
 				<tr>
 					<th style="text-align: center;">Title</th>
