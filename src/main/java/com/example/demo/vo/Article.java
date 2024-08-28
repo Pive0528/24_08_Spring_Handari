@@ -22,6 +22,8 @@ public class Article {
 
 	private String extra__writer;
 
+	private String extra__repliesCount;
+
 	private String extra__sumReactionPoint;
 
 	private boolean userCanModify;
