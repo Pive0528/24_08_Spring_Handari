@@ -31,7 +31,6 @@
 		console.log("data.response.body.items[0]", data.response.body.items[0]);
 		console.log("data.response.body.items[0].loCrdnt", data.response.body.items[0].loCrdnt);
 		console.log("data.response.body.items[0].laCrdnt", data.response.body.items[0].laCrdnt);
-		
 	}
 	getCData();
 	getCData2();
