@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.service.MemberService;
 import com.example.demo.util.Ut;
+import com.example.demo.vo.Article;
 import com.example.demo.vo.Member;
 import com.example.demo.vo.ResultData;
 import com.example.demo.vo.Rq;
@@ -124,11 +125,11 @@ public class UsrMemberController {
 	@ResponseBody
 	public String doCheckPw(String loginPw) {
 		if (Ut.isEmptyOrNull(loginPw)) {
-			return rq.historyBackOnView("비번 써");
+			return Ut.jsHistoryBack("F-1", "비번 써");
 		}
 
 		if (rq.getLoginedMember().getLoginPw().equals(loginPw) == false) {
-			return rq.historyBackOnView("비번 틀림");
+			return Ut.jsHistoryBack("F-2", "비번 틀림");
 		}
 
 		return Ut.jsReplace("S-1", Ut.f("비밀번호 확인 성공"), "modify");
@@ -137,5 +138,38 @@ public class UsrMemberController {
 	@RequestMapping("/usr/member/modify")
 	public String showmyModify() {
 		return "usr/member/modify";
+	}
+
+	@RequestMapping("/usr/member/doModify")
+	@ResponseBody
+	public String doModify(HttpServletRequest req, String loginPw, String name, String nickname, String cellphoneNum,
+			String email) {
+
+		Rq rq = (Rq) req.getAttribute("rq");
+
+		// 비번은 안바꾸는거 가능(사용자) 비번 null 체크는 x
+
+		if (Ut.isEmptyOrNull(name)) {
+			return Ut.jsHistoryBack("F-3", "name 입력 x");
+		}
+		if (Ut.isEmptyOrNull(nickname)) {
+			return Ut.jsHistoryBack("F-4", "nickname 입력 x");
+		}
+		if (Ut.isEmptyOrNull(cellphoneNum)) {
+			return Ut.jsHistoryBack("F-5", "cellphoneNum 입력 x");
+		}
+		if (Ut.isEmptyOrNull(email)) {
+			return Ut.jsHistoryBack("F-6", "email 입력 x");
+		}
+
+		ResultData modifyRd;
+
+		if (Ut.isEmptyOrNull(loginPw)) {
+			modifyRd = memberService.modifyWithoutPw(rq.getLoginedMemberId(), name, nickname, cellphoneNum, email);
+		} else {
+			modifyRd = memberService.modify(rq.getLoginedMemberId(), loginPw, name, nickname, cellphoneNum, email);
+		}
+
+		return Ut.jsReplace(modifyRd.getResultCode(), modifyRd.getMsg(), "../member/myPage");
 	}
 }
