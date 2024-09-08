@@ -3,11 +3,11 @@ package com.example.demo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.service.MemberService;
 import com.example.demo.util.Ut;
+import com.example.demo.vo.Article;
 import com.example.demo.vo.Member;
 import com.example.demo.vo.ResultData;
 import com.example.demo.vo.Rq;
@@ -57,14 +57,8 @@ public class UsrMemberController {
 			return Ut.jsHistoryBack("F-3", Ut.f("%s는(은) 존재 x", loginId));
 		}
 
-		System.err.println(Ut.sha256(loginPw));
-
-		if (member.getLoginPw().equals(Ut.sha256(loginPw)) == false) {
-			return Ut.jsHistoryBack("F-4", Ut.f("비밀번호가 일치하지 않습니다!!!!!"));
-		}
-
-		if (member.isDelStatus() == true) {
-			return Ut.jsReplace("사용정지된 계정이야", "/");
+		if (member.getLoginPw().equals(loginPw) == false) {
+			return Ut.jsHistoryBack("F-4", Ut.f("비밀번호 틀림"));
 		}
 
 		rq.login(member);
@@ -135,7 +129,7 @@ public class UsrMemberController {
 			return Ut.jsHistoryBack("F-1", "비번 써");
 		}
 
-		if (rq.getLoginedMember().getLoginPw().equals(Ut.sha256(loginPw)) == false) {
+		if (rq.getLoginedMember().getLoginPw().equals(loginPw) == false) {
 			return Ut.jsHistoryBack("F-2", "비번 틀림");
 		}
 
@@ -195,52 +189,5 @@ public class UsrMemberController {
 		}
 
 		return ResultData.from("S-1", "사용 가능!", "loginId", loginId);
-	}
-
-	@RequestMapping("/usr/member/findLoginId")
-	public String showFindLoginId() {
-
-		return "usr/member/findLoginId";
-	}
-
-	@RequestMapping("/usr/member/doFindLoginId")
-	@ResponseBody
-	public String doFindLoginId(@RequestParam(defaultValue = "/") String afterFindLoginIdUri, String name,
-			String email) {
-
-		Member member = memberService.getMemberByNameAndEmail(name, email);
-
-		if (member == null) {
-			return Ut.jsHistoryBack("F-1", "너는 없는 사람이야");
-		}
-
-		return Ut.jsReplace("S-1", Ut.f("너의 아이디는 [ %s ] 야", member.getLoginId()), afterFindLoginIdUri);
-	}
-
-	@RequestMapping("/usr/member/findLoginPw")
-	public String showFindLoginPw() {
-
-		return "usr/member/findLoginPw";
-	}
-
-	@RequestMapping("/usr/member/doFindLoginPw")
-	@ResponseBody
-	public String doFindLoginPw(@RequestParam(defaultValue = "/") String afterFindLoginPwUri, String loginId,
-			String email) {
-
-		Member member = memberService.getMemberByLoginId(loginId);
-
-		if (member == null) {
-			return Ut.jsHistoryBack("F-1", "너는 없는 사람이야");
-		}
-
-		if (member.getEmail().equals(email) == false) {
-			return Ut.jsHistoryBack("F-2", "일치하는 이메일이 없는데?");
-		}
-
-		ResultData notifyTempLoginPwByEmailRd = memberService.notifyTempLoginPwByEmail(member);
-
-		return Ut.jsReplace(notifyTempLoginPwByEmailRd.getResultCode(), notifyTempLoginPwByEmailRd.getMsg(),
-				afterFindLoginPwUri);
 	}
 }

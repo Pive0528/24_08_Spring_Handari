@@ -22,6 +22,7 @@ CREATE TABLE `member`(
       loginPw CHAR(100) NOT NULL,
       `authLevel` smallint(2) unsigned default 3 comment '권한 레벨 (3=일반,7=관리자)',
       `name` char(20) not null,
+      
       nickname char(20) not null,
       cellphoneNum char(20) not null,
       email char(50) not null,

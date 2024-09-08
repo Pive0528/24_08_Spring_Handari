@@ -6,8 +6,8 @@
 <hr />
 
 <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni earum repudiandae iure explicabo officia
-	vitae suscipit architecto quis qui blanditiis dolorum totam maiores sunt numquam a! Ad non iusto veritatis.</div>
-<div>안녕</div>
-
+	vitae suscipit architecto quis qui blanditiis dolorum totam maiores sunt numquam a! Ad non iusto veritatis.
+	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum illum quod quasi minima numquam ut provident
+	vero aliquam nisi laboriosam at adipisci deserunt ducimus cum unde rem quae iusto maxime?</div>
 
 <%@ include file="../common/foot.jspf"%>
