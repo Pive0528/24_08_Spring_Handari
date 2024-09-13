@@ -81,7 +81,7 @@
 				</li>
 				<c:if test="${!rq.isLogined() }">
 					<li style="margin-left: 10px; margin-right: 10px;"><a class="hover:underline" href="../member/login">LOGIN</a></li>
-					<li style="margin-left: 10px; margin-right: 10px;"><a class="hover:underline" href="../member/join">JOIN</a></li>
+					<li style="margin-left: 10px; margin-right: 10px;"><a class="hover:underline" href="../member/join">회원가입</a></li>
 				</c:if>
 				<c:if test="${rq.isLogined() }">
 					<li style="margin-left: 10px; margin-right: 10px;"><a class="hover:underline" href="../article/write">WRITE</a></li>
