@@ -41,12 +41,13 @@
 		<table class="table" border="1" cellspacing="0" cellpadding="5" style="width: 100%; border-collapse: collapse;">
 			<thead>
 				<tr>
-					<th style="text-align: center;">ID</th>
-					<th style="text-align: center;">Registration Date</th>
-					<th style="text-align: center;">Title</th>
-					<th style="text-align: center;">Writer</th>
-					<th style="text-align: center;">Like</th>
-					<th style="text-align: center;">Dislike</th>
+					<th style="text-align: center;">번호</th>
+					<th style="text-align: center;">작성 날짜</th>
+					<th style="text-align: center;">제목</th>
+					<th style="text-align: center;">작성자</th>
+					<th style="text-align: center;">좋아요</th>
+					<th style="text-align: center;">싫어요</th>
+					<th style="text-align: center;">조회수</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -55,15 +56,15 @@
 						<td style="text-align: center;">${article.id}</td>
 						<td style="text-align: center;">${article.regDate.substring(0,10)}</td>
 						<td style="text-align: center;">
-							<a class="hover:underline" href="detail?id=${article.id}">${article.title} <c:if
-									test="${article.extra__repliesCount > 0 }">
+						<a class="hover:underline" href="detail?id=${article.id}">${article.title}
+								<c:if test="${article.extra__repliesCount > 0 }">
 									<span style="color: red;">[${article.extra__repliesCount }]</span>
 								</c:if>
-							</a>
-						</td>
+						</a></td>
 						<td style="text-align: center;">${article.extra__writer}</td>
 						<td style="text-align: center;">${article.goodReactionPoint}</td>
 						<td style="text-align: center;">${article.badReactionPoint}</td>
+						<td style="text-align: center;">${article.hitCount}</td>
 					</tr>
 				</c:forEach>
 

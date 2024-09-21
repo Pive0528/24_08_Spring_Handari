@@ -23,13 +23,20 @@ public class UsrMemberController {
 	@Autowired
 	private MemberService memberService;
 
+	
+	@RequestMapping("/usr/member/findLoginId")
+	@ResponseBody
+	public String showFindLoginIdPage(HttpServletRequest req) {
+        return "/usr/member/findLoginId"; // JSP 파일 반환
+    }
+	
 	@RequestMapping("/usr/member/doLogout")
 	@ResponseBody
 	public String doLogout(HttpServletRequest req) {
 
 		rq.logout();
 
-		return Ut.jsReplace("S-1", Ut.f("로그아웃 성공"), "/");
+		return Ut.jsReplace("S-1", Ut.f("로그아웃 성공"), "../home/main");
 	}
 
 	@RequestMapping("/usr/member/login")
@@ -67,7 +74,7 @@ public class UsrMemberController {
 			return Ut.jsReplace("S-1", Ut.f("%s님 환영합니다", member.getNickname()), afterLoginUri);
 		}
 
-		return Ut.jsReplace("S-1", Ut.f("%s님 환영합니다", member.getNickname()), "/");
+		return Ut.jsReplace("S-1", Ut.f("%s님 환영합니다", member.getNickname()), "../home/main");
 	}
 
 	@RequestMapping("/usr/member/join")
@@ -190,4 +197,7 @@ public class UsrMemberController {
 
 		return ResultData.from("S-1", "사용 가능!", "loginId", loginId);
 	}
+	
+	
+	
 }

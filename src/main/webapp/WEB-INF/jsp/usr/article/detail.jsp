@@ -234,35 +234,35 @@ function doModifyReply(replyId) {
 		<table class="table" border="1" cellspacing="0" cellpadding="5" style="width: 100%; border-collapse: collapse;">
 			<tbody>
 				<tr>
-					<th style="text-align: center;">ID</th>
+					<th style="text-align: center;">번호</th>
 					<td style="text-align: center;">${article.id}</td>
 				</tr>
 				<tr>
-					<th style="text-align: center;">Registration Date</th>
+					<th style="text-align: center;">작성 날짜</th>
 					<td style="text-align: center;">${article.regDate.substring(0,10)}</td>
 				</tr>
 				<tr>
-					<th style="text-align: center;">Modified date</th>
+					<th style="text-align: center;">세부 날짜</th>
 					<td style="text-align: center;">${article.updateDate}</td>
 				</tr>
 				<tr>
-					<th style="text-align: center;">BoardId</th>
+					<th style="text-align: center;">게시판 번호</th>
 					<td style="text-align: center;">${article.boardId}</td>
 				</tr>
 				<tr>
-					<th style="text-align: center;">Writer</th>
+					<th style="text-align: center;">작성자</th>
 					<td style="text-align: center;">${article.extra__writer}</td>
 				</tr>
 				<tr>
-					<th class="reaction" style="text-align: center;">Like</th>
+					<th class="reaction" style="text-align: center;">좋아요</th>
 					<td id="likeCount" style="text-align: center;">${article.goodReactionPoint}</td>
 				</tr>
 				<tr>
-					<th style="text-align: center;">Dislike</th>
+					<th style="text-align: center;">싫어요</th>
 					<td id="DislikeCount" style="text-align: center;">${article.badReactionPoint}</td>
 				</tr>
 				<tr>
-					<th style="text-align: center;">LIKE / Dislike / ${usersReaction }</th>
+					<th style="text-align: center;">좋아요 / 싫어요 ${usersReaction }</th>
 					<td style="text-align: center;">
 
 						<button id="likeButton" class="btn btn-outline btn-success" onclick="doGoodReaction(${param.id})">
@@ -281,18 +281,18 @@ function doModifyReply(replyId) {
 				</tr>
 
 				<tr>
-					<th style="text-align: center;">Views</th>
+					<th style="text-align: center;">조회수</th>
 
 					<td style="text-align: center;">
 						<span class="article-detail__hit-count">${article.hitCount}</span>
 					</td>
 				</tr>
 				<tr>
-					<th style="text-align: center;">Title</th>
+					<th style="text-align: center;">제목</th>
 					<td style="text-align: center;">${article.title}</td>
 				</tr>
 				<tr>
-					<th style="text-align: center;">Attached Image</th>
+					<th style="text-align: center;">이미지</th>
 					<td style="text-align: center;">
 						<div style="text-align: center;">
 							<img class="mx-auto rounded-xl" src="${rq.getImgUri(article.id)}" onerror="${rq.profileFallbackImgOnErrorHtml}" alt="" />
@@ -301,7 +301,7 @@ function doModifyReply(replyId) {
 					</td>
 				</tr>
 				<tr>
-					<th style="text-align: center;">Body</th>
+					<th style="text-align: center;">내용</th>
 					<td>
 						<div class="toast-ui-viewer">
 							<script type="text/x-template">${article.body}</script>
@@ -377,13 +377,13 @@ function doModifyReply(replyId) {
 		<table class="table" border="1" cellspacing="0" cellpadding="5" style="width: 100%; border-collapse: collapse;">
 			<thead>
 				<tr>
-					<th style="text-align: center;">Registration Date</th>
-					<th style="text-align: center;">Writer</th>
-					<th style="text-align: center;">Body</th>
-					<th style="text-align: center;">Like</th>
-					<th style="text-align: center;">Dislike</th>
-					<th style="text-align: center;">Edit</th>
-					<th style="text-align: center;">Delete</th>
+					<th style="text-align: center;">작성 날짜</th>
+					<th style="text-align: center;">작성자</th>
+					<th style="text-align: center;">내용</th>
+					<th style="text-align: center;">좋아요</th>
+					<th style="text-align: center;">싫어요</th>
+					<th style="text-align: center;">수정</th>
+					<th style="text-align: center;">삭제</th>
 				</tr>
 			</thead>
 			<tbody>

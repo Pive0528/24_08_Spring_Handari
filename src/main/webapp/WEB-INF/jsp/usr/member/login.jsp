@@ -12,18 +12,14 @@
 				<tbody>
 					<tr>
 						<th>아이디</th>
-						<td style="text-align: center;">
-							<input class="input input-bordered input-primary input-sm w-full max-w-xs" name="loginId" autocomplete="off"
-								type="text" placeholder="아이디를 입력해" />
-						</td>
+						<td style="text-align: center;"><input class="input input-bordered input-primary input-sm w-full max-w-xs"
+							name="loginId" autocomplete="off" type="text" placeholder="아이디를 입력해" /></td>
 
 					</tr>
 					<tr>
 						<th>비밀번호</th>
-						<td style="text-align: center;">
-							<input class="input input-bordered input-primary input-sm w-full max-w-xs" name="loginPw" autocomplete="off"
-								type="text" placeholder="비밀번호를 입력해" />
-						</td>
+						<td style="text-align: center;"><input class="input input-bordered input-primary input-sm w-full max-w-xs"
+							name="loginPw" autocomplete="off" type="text" placeholder="비밀번호를 입력해" /></td>
 
 					</tr>
 					<tr>
@@ -35,10 +31,14 @@
 					</tr>
 					<tr>
 						<th></th>
+						<td style="text-align: center;"><a class="btn btn-outline btn-primary" href="../member/findLoginId">아이디
+								찾기</a> <a class="btn btn-outline btn-success" href="../member/findLoginPw">비밀번호찾기</a></td>
+					</tr>
+					<tr>
+						<th></th>
 						<td style="text-align: center;">
-							<a class="btn btn-outline btn-primary" href="${rq.findLoginIdUri }">아이디 찾기</a>
-							<a class="btn btn-outline btn-success" href="${rq.findLoginPwUri }">비밀번호찾기</a>
-						</td>
+						<a class="btn btn-outline btn-black" href="../member/join">회원가입</a></td>
+		
 					</tr>
 				</tbody>
 			</table>

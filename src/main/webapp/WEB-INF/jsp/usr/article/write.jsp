@@ -47,8 +47,8 @@
 							<select name="boardId">
 								<option value="" selected disabled>게시판을 선택해주세요.</option>
 								<option value="1">공지사항</option>
-								<option value="2">자유</option>
-								<option value="3">질의응답</option>
+								<option value="2">자유게시판</option>
+								<option value="3">축제후기</option>
 							</select>
 						</td>
 
