@@ -16,7 +16,7 @@
 			}
 
 			if (form.loginPwConfirm.value != form.loginPw.value) {
-				alert('비번 불일치');
+				alert('비밀번호가 불일치합니다.');
 				return;
 			}
 
@@ -27,7 +27,8 @@
 </script>
 
 <section class="mt-24 text-xl px-4">
-	<div class="mx-auto">
+	<div class="mx-auto max-w-screen-lg">
+
 		<form onsubmit="MemberModify__submit(this); return false;" action="../member/doModify" method="POST">
 			<table class="table" border="1" cellspacing="0" cellpadding="5" style="width: 100%; border-collapse: collapse;">
 				<tbody>
@@ -45,28 +46,28 @@
 						<th>새 비밀번호</th>
 						<td style="text-align: center;">
 							<input class="input input-bordered input-primary input-sm w-full max-w-xs" name="loginPw" autocomplete="off"
-								type="text" placeholder="새 비밀번호를 입력해" />
+								type="text" placeholder="새 비밀번호를 입력해주세요." />
 						</td>
 					</tr>
 					<tr>
 						<th>새 비밀번호 확인</th>
 						<td style="text-align: center;">
 							<input class="input input-bordered input-primary input-sm w-full max-w-xs" name="loginPwConfirm"
-								autocomplete="off" type="text" placeholder="새 비밀번호확인을 입력해" />
+								autocomplete="off" type="text" placeholder="새 비밀번호확인을 입력해주세요." />
 						</td>
 					</tr>
 					<tr>
 						<th>이름</th>
 						<td style="text-align: center;">
 							<input class="input input-bordered input-primary input-sm w-full max-w-xs" name="name" autocomplete="off"
-								type="text" placeholder="이름 입력해" value="${rq.loginedMember.name }" />
+								type="text" placeholder="이름을 입력해주세요." value="${rq.loginedMember.name }" />
 						</td>
 					</tr>
 					<tr>
 						<th>닉네임</th>
 						<td style="text-align: center;">
 							<input class="input input-bordered input-primary input-sm w-full max-w-xs" name="nickname" autocomplete="off"
-								type="text" placeholder="닉네임 입력해" value="${rq.loginedMember.nickname }" />
+								type="text" placeholder="닉네임을 입력해주세요." value="${rq.loginedMember.nickname }" />
 						</td>
 
 					</tr>
@@ -74,7 +75,7 @@
 						<th>이메일</th>
 						<td style="text-align: center;">
 							<input class="input input-bordered input-primary input-sm w-full max-w-xs" name="email" autocomplete="off"
-								type="text" placeholder="이메일을 입력해" value="${rq.loginedMember.email }" />
+								type="text" placeholder="이메일을 입력해주세요." value="${rq.loginedMember.email }" />
 						</td>
 
 					</tr>
@@ -82,7 +83,7 @@
 						<th>전화번호</th>
 						<td style="text-align: center;">
 							<input class="input input-bordered input-primary input-sm w-full max-w-xs" name="cellphoneNum" autocomplete="off"
-								type="text" placeholder="전화번호를 입력해" value="${rq.loginedMember.cellphoneNum }" />
+								type="text" placeholder="전화번호를 입력해주세요." value="${rq.loginedMember.cellphoneNum }" />
 						</td>
 					</tr>
 					<tr>

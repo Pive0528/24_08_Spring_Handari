@@ -213,7 +213,7 @@ public class UsrArticleController {
 				searchKeyword);
 
 		if (board == null) {
-			return rq.historyBackOnView("없는 게시판임");
+			return rq.historyBackOnView("존재하지 않는 게시판입니다.");
 		}
 
 		model.addAttribute("articles", articles);

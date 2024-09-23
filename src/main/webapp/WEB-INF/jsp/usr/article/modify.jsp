@@ -28,7 +28,7 @@
 </script>
 
 <section class="mt-24 text-xl px-4">
-	<div class="mx-auto">
+	<div class="mx-auto max-w-screen-lg">
 		<form onsubmit="ArticleModify__submit(this); return false;" action=" ../article/doModify" method="POST">
 			<input type="hidden" name="id" value="${article.id}" /> <input type="hidden" name="body">
 			<table class="table" border="1" cellspacing="0" cellpadding="5" style="width: 100%; border-collapse: collapse;">
@@ -51,10 +51,8 @@
 					</tr>
 					<tr>
 						<th style="text-align: center;">제목</th>
-						<td style="text-align: center;">
-							<input name="title" value="${article.title}" type="text" autocomplete="off" placeholder="새 제목을 입력해"
-								class="input input-bordered input-primary w-full max-w-xs input-sm " />
-						</td>
+						<td style="text-align: center;"><input name="title" value="${article.title}" type="text" autocomplete="off"
+							placeholder="새 제목을 입력해주세요." class="input input-bordered input-primary w-full max-w-xs input-sm " /></td>
 					</tr>
 					<tr>
 						<th style="text-align: center;">Body</th>

@@ -6,6 +6,7 @@
 <!-- lodash debounce -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
 <script>
+
 	let validLoginId = "";
 	function JoinForm__submit(form) {
 
@@ -81,7 +82,7 @@
 	const checkLoginIdDupDebounced = _.debounce(checkLoginIdDup, 600); // 실행 빈도 조절
 </script>
 <section class="mt-24 text-xl px-4">
-	<div class="mx-auto">
+	<div class="mx-auto max-w-screen-lg">
 		<form action="../member/doJoin" method="POST" onsubmit="JoinForm__submit(this); return false;">
 			<table class="table" border="1" cellspacing="0" cellpadding="5" style="width: 100%; border-collapse: collapse;">
 				<tbody>
@@ -90,7 +91,7 @@
 						<td style="text-align: center;">
 							<input onkeyup="checkLoginIdDupDebounced(this);"
 								class="input input-bordered input-primary input-sm w-full max-w-xs" name="loginId" autocomplete="off"
-								type="text" placeholder="아이디를 입력해" />
+								type="text" placeholder="아이디를 입력해주세요." />
 						</td>
 
 					</tr>
@@ -105,41 +106,41 @@
 						<th>비밀번호</th>
 						<td style="text-align: center;">
 							<input class="input input-bordered input-primary input-sm w-full max-w-xs" name="loginPw" autocomplete="off"
-								type="text" placeholder="비밀번호를 입력해" />
+								type="text" placeholder="비밀번호를 입력해주세요." />
 						</td>
 					</tr>
 					<tr>
 						<th>이름</th>
 						<td style="text-align: center;">
 							<input class="input input-bordered input-primary input-sm w-full max-w-xs" name="name" autocomplete="off"
-								type="text" placeholder="이름 입력해" />
+								type="text" placeholder="이름을 입력해주세요." />
 						</td>
 					</tr>
 					<tr>
 						<th>닉네임</th>
 						<td style="text-align: center;">
 							<input class="input input-bordered input-primary input-sm w-full max-w-xs" name="nickname" autocomplete="off"
-								type="text" placeholder="닉네임 입력해" />
+								type="text" placeholder="닉네임을 입력해주세요." />
 						</td>
 					</tr>
 					<tr>
 						<th>전화번호</th>
 						<td style="text-align: center;">
 							<input class="input input-bordered input-primary input-sm w-full max-w-xs" name="cellphoneNum" autocomplete="off"
-								type="text" placeholder="전화번호를 입력해" />
+								type="text" placeholder="전화번호를 입력해주세요." />
 						</td>
 					</tr>
 					<tr>
 						<th>이메일</th>
 						<td style="text-align: center;">
 							<input class="input input-bordered input-primary input-sm w-full max-w-xs" name="email" autocomplete="off"
-								type="text" placeholder="이메일을 입력해" />
+								type="text" placeholder="이메일을 입력해주세요." />
 						</td>
 					</tr>
 					<tr>
 						<th></th>
 						<td style="text-align: center;">
-							<button type="submit" class="btn btn-primary">가입</button>
+							<button type="submit" class="btn btn-primary">회원가입</button>
 						</td>
 
 					</tr>

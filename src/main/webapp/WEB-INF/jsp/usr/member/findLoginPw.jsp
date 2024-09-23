@@ -12,12 +12,12 @@
 		form.loginId.value = form.loginId.value.trim();
 		form.email.value = form.email.value.trim();
 		if (form.loginId.value.length == 0) {
-			alert('아이디 써라');
+			alert('아이디를 입력해주세요.');
 			form.loginId.focus();
 			return;
 		}
 		if (form.email.value.length == 0) {
-			alert('email 써라');
+			alert('이메일을 입력해주세요.');
 			form.email.focus();
 			return;
 		}
@@ -28,7 +28,7 @@
 </script>
 
 <section class="mt-8 text-xl px-4">
-	<div class="mx-auto">
+	<div class="mx-auto max-w-screen-lg">
 		<form action="../member/doFindLoginPw" method="POST" onsubmit="MemberFindLoginPw__submit(this);">
 			<input type="hidden" name="afterFindLoginPwUri" value="${param.afterFindLoginPwUri  }" />
 			<table class="table" border="1" cellspacing="0" cellpadding="5" style="width: 100%; border-collapse: collapse;">

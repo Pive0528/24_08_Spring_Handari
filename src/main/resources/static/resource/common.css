@@ -40,6 +40,7 @@ html>body {
 	color: #000;
 }
 
+
 /* 전체 헤더 스타일 */
 header {
     position: relative;
@@ -87,17 +88,22 @@ header ul li {
 header ul li a {
     font-family: 'JejuGothic', sans-serif;
     font-size: 10px !important;
-    font-weight: 400;
+    font-weight: bold;
     text-decoration: none;
+    src:
+     url('//fonts.googleapis.com/earlyaccess/jejugothic.css');
 }
 
 
 /* 로그인 버튼 스타일 */
 header .login-btn {
+	
     margin-right: 20px;
     font-family: 'JejuGothic', sans-serif;
     font-size: 11px;
-    font-weight: 400;
+    font-weight: bold;
     color: #000;
     text-decoration: none;
+    src:
+     url('//fonts.googleapis.com/earlyaccess/jejugothic.css');
 }

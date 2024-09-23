@@ -52,29 +52,29 @@ public class UsrMemberController {
 		Rq rq = (Rq) req.getAttribute("rq");
 
 		if (Ut.isEmptyOrNull(loginId)) {
-			return Ut.jsHistoryBack("F-1", "loginId 입력 x");
+			return Ut.jsHistoryBack("F-1", "아이디가 입력되지 않았습니다.");
 		}
 		if (Ut.isEmptyOrNull(loginPw)) {
-			return Ut.jsHistoryBack("F-2", "loginPw 입력 x");
+			return Ut.jsHistoryBack("F-2", "비밀번호가 입력되지 않았습니다.");
 		}
 
 		Member member = memberService.getMemberByLoginId(loginId);
 
 		if (member == null) {
-			return Ut.jsHistoryBack("F-3", Ut.f("%s는(은) 존재 x", loginId));
+			return Ut.jsHistoryBack("F-3", Ut.f("%s는(은) 존재하지 않습니다.", loginId));
 		}
 
 		if (member.getLoginPw().equals(loginPw) == false) {
-			return Ut.jsHistoryBack("F-4", Ut.f("비밀번호 틀림"));
+			return Ut.jsHistoryBack("F-4", Ut.f("비밀번호가 틀립니다."));
 		}
 
 		rq.login(member);
 
 		if (afterLoginUri.length() > 0) {
-			return Ut.jsReplace("S-1", Ut.f("%s님 환영합니다", member.getNickname()), afterLoginUri);
+			return Ut.jsReplace("S-1", Ut.f("%s님, 환영합니다!", member.getNickname()), afterLoginUri);
 		}
 
-		return Ut.jsReplace("S-1", Ut.f("%s님 환영합니다", member.getNickname()), "../home/main");
+		return Ut.jsReplace("S-1", Ut.f("%s님, 환영합니다!", member.getNickname()), "../home/main");
 	}
 
 	@RequestMapping("/usr/member/join")
@@ -186,7 +186,7 @@ public class UsrMemberController {
 	public ResultData getLoginIdDup(String loginId) {
 
 		if (Ut.isEmpty(loginId)) {
-			return ResultData.from("F-1", "아이디를 입력해주세요");
+			return ResultData.from("F-1", "아이디를 입력해주세요.");
 		}
 
 		Member existsMember = memberService.getMemberByLoginId(loginId);

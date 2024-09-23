@@ -60,23 +60,22 @@
 <body>
 
 	<header>
-		<div class="flex h-20 mx-auto items-center text-3xl">
+		<div class="flex h-20 mx-auto items-center">
 			<a href="../home/main"> <img src="https://i.ibb.co/0Kt4sYn/22.png" width="160" />
 			</a>
-			<div cilass="flex-grow"></div>
-			<ul class="flex">
-				<a href="#" style="font-size: 20px;"><i class="fas fa-search" ></i> 축제검색</a>
-				<a class="hover:underline" href="../article/list?boardId=1&page=1" style="font-size: 20px;">공지사항</a>
-					<a class="hover:underline" href="../article/list?boardId=2&page=1" style="font-size: 20px;">자유게시판</a>
-					<a class="hover:underline" href="../article/list?boardId=3&page=1" style="font-size: 20px;">축제후기</a>
-					<a class="hover:underline" href="../article/list?boardId=4&page=1" style="font-size: 20px;">분실물신고</a>
-					<a class="hover:underline" href="../article/list?boardId=5&page=1" style="font-size: 20px;">사이트소개</a>
+			<div class="flex-grow"></div>
+			<ul class="flex" style="font-size: 18px; font-weight: bold;">
+				<a href="#"><i class="fas fa-search" ></i> 축제검색</a>
+				<a class="hover:underline" href="../article/list?boardId=1&page=1">공지사항</a>
+					<a class="hover:underline" href="../article/list?boardId=2&page=1">자유게시판</a>
+					<a class="hover:underline" href="../article/list?boardId=3&page=1">축제후기</a>
+					<a class="hover:underline" href="../article/list?boardId=4&page=1">분실물신고</a>
+					<a class="hover:underline" href="../article/list?boardId=5&page=1">사이트소개</a>
 					<c:if test="${!rq.isLogined() }">
-						<a class="hover:underline" href="../member/login" style="font-size: 20px;">로그인</a>
+						<a class="hover:underline" href="../member/login" style="margin-left: 100px;">로그인</a>
 					</c:if> <c:if test="${rq.isLogined() }">
-						<a class="hover:underline" href="../article/write" style="font-size: 20px;">글쓰기</a>
-						<a class="hover:underline" href="../member/myPage" style="font-size: 20px;">마이페이지</a>
-						<a onclick="if(confirm('로그아웃 하시겠습니까?') == false) return false;" class="hover:underline" href="../member/doLogout" style="font-size: 20px;">로그아웃</a>
+						<a class="hover:underline" href="../member/myPage" style="margin-left: 100px;">마이페이지</a>
+						<a onclick="if(confirm('로그아웃 하시겠습니까?') == false) return false;" class="hover:underline" href="../member/doLogout" >로그아웃</a>
 					</c:if> <c:if test="${rq.admin}">
 						<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/adm/member/list"> <span>M.LIST</span>
 						</a></li>

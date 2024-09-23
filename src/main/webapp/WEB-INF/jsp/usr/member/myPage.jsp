@@ -5,7 +5,8 @@
 <hr />
 
 <section class="mt-24 text-xl px-4">
-	<div class="mx-auto">
+	<div class="mx-auto max-w-screen-lg">
+
 		<table class="table" border="1" cellspacing="0" cellpadding="5" style="width: 100%; border-collapse: collapse;">
 			<tbody>
 
@@ -42,6 +43,7 @@
 					<td style="text-align: center;">
 						<a href="../member/checkPw" class="btn btn-primary">수정 </a>
 					</td>
+					
 				</tr>
 			</tbody>
 		</table>

@@ -5,7 +5,8 @@
 <hr />
 
 <section class="mt-24 text-xl px-4">
-	<div class="mx-auto">
+	<div class="mx-auto max-w-screen-lg">
+
 		<form action="../member/doLogin" method="POST">
 			<input type="hidden" name="afterLoginUri" value="${param.afterLoginUri }" />
 			<table class="table" border="1" cellspacing="0" cellpadding="5" style="width: 100%; border-collapse: collapse;">
@@ -13,13 +14,13 @@
 					<tr>
 						<th>아이디</th>
 						<td style="text-align: center;"><input class="input input-bordered input-primary input-sm w-full max-w-xs"
-							name="loginId" autocomplete="off" type="text" placeholder="아이디를 입력해" /></td>
+							name="loginId" autocomplete="off" type="text" placeholder="아이디를 입력해주세요." /></td>
 
 					</tr>
 					<tr>
 						<th>비밀번호</th>
 						<td style="text-align: center;"><input class="input input-bordered input-primary input-sm w-full max-w-xs"
-							name="loginPw" autocomplete="off" type="text" placeholder="비밀번호를 입력해" /></td>
+							name="loginPw" autocomplete="off" type="text" placeholder="비밀번호를 입력해주세요." /></td>
 
 					</tr>
 					<tr>

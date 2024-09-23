@@ -4,13 +4,13 @@
 <%@ include file="../common/head.jspf"%>
 <hr />
 
-<section class="mt-24 text-xl px-4">
-	<div class="mx-auto">
+<section class="mt-6 text-xl px-4">
+	<div class="mx-auto max-w-screen-lg">
 
 		<%-- 		${articles} --%>
 
 		<div class="mb-4 flex">
-			<div>${articlesCount }개</div>
+			<div>게시판(${articlesCount })</div>
 			<div class="flex-grow"></div>
 			<!-- 			<form action="../article/list"> -->
 			<form action="">
@@ -19,10 +19,10 @@
 					<select class="select select-sm select-bordered
 						max-w-xs" name="searchKeywordTypeCode"
 						data-value="${param.searchKeywordTypeCode } ">
-						<option value="title">title</option>
-						<option value="body">body</option>
-						<option value="title,body">title+body</option>
-						<option value="writer">writer</option>
+						<option value="title">제목</option>
+						<option value="body">내용</option>
+						<option value="title,body">제목+내용</option>
+						<option value="writer">작성자</option>
 					</select> <label class="ml-3 input input-bordered input-sm flex items-center gap-2"> <input type="text"
 						placeholder="Search" name="searchKeyword" value="${param.searchKeyword }" />
 						<button type="submit">
@@ -41,13 +41,13 @@
 		<table class="table" border="1" cellspacing="0" cellpadding="5" style="width: 100%; border-collapse: collapse;">
 			<thead>
 				<tr>
-					<th style="text-align: center;">번호</th>
-					<th style="text-align: center;">작성 날짜</th>
-					<th style="text-align: center;">제목</th>
-					<th style="text-align: center;">작성자</th>
-					<th style="text-align: center;">좋아요</th>
-					<th style="text-align: center;">싫어요</th>
-					<th style="text-align: center;">조회수</th>
+					<th style="text-align: center; width: 5%;">번호</th>
+					<th style="text-align: center; width: 15%;">작성 날짜</th>
+					<th style="text-align: center; width: 40%;">제목</th>
+					<th style="text-align: center; width: 15%;">작성자</th>
+					<th style="text-align: center; width: 5%;">좋아요</th>
+					<th style="text-align: center; width: 5%;">싫어요</th>
+					<th style="text-align: center; width: 5%;">조회수</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -70,9 +70,18 @@
 
 				<c:if test="${empty articles}">
 					<tr>
-						<td colspan="4" style="text-align: center;">게시글이 없습니다</td>
+						<td colspan="7" style="text-align: center;">게시글이 없습니다</td>
 					</tr>
 				</c:if>
+
+				<!-- 글쓰기 버튼을 조회수 아래에 위치 -->
+				<tr>
+					<td colspan="6"></td>
+					<td style="text-align: center;"><a href="../article/write" class="btn btn-black"
+						style="writing-mode: horizontal-tb; white-space: nowrap;">글쓰기</a></td>
+				</tr>
+
+
 			</tbody>
 		</table>
 	</div>
@@ -108,11 +117,12 @@
 		<c:if test="${endPage < pagesCount }">
 			<a class="btn btn-sm" href="${ baseUri}&page=${pagesCount }">${pagesCount }</a>
 		</c:if>
+
 	</div>
 
 
 	<!-- 	직관적인 페이징 -->
-	<div class="pagination flex justify-center mt-3">
+	<!-- <div class="pagination flex justify-center mt-3">
 		<div class="btn-group">
 
 			<c:forEach begin="1" end="${pagesCount }" var="i">
@@ -120,6 +130,6 @@
 			</c:forEach>
 		</div>
 	</div>
-</section>
+</section> -->
 
 <%@ include file="../common/foot.jspf"%>
