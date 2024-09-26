@@ -39,9 +39,9 @@
 					<td style="text-align: center;">${rq.loginedMember.cellphoneNum }</td>
 				</tr>
 				<tr>
-					<th>회원정보 수정</th>
+					<th></th>
 					<td style="text-align: center;">
-						<a href="../member/checkPw" class="btn btn-primary">수정 </a>
+						<a href="../member/checkPw" class="btn btn-primary">회원정보 수정 </a>
 					</td>
 					
 				</tr>

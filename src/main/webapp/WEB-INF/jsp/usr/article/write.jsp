@@ -32,7 +32,7 @@
 </script>
 
 
-<section class="mt-24 text-xl px-4">
+<section class="mt-6 text-xl px-4">
 	<div class="mx-auto max-w-screen-lg">
 		<form onsubmit="ArticleWrite__submit(this); return false;" action="../article/doWrite" method="POST"
 			enctype="multipart/form-data">
@@ -65,8 +65,8 @@
 					<tr>
 						<th style="writing-mode: horizontal-tb; white-space: nowrap;">내용</th>
 						<td style="text-align: left;">
-							<!-- 							<input class="input input-bordered input-primary input-sm w-full max-w-xs" name="body" autocomplete="off" -->
-							<!-- 								type="text" placeholder="내용을 입력해" /> -->
+							<!-- 	<input class="input input-bordered input-primary input-sm w-full max-w-xs" name="body" autocomplete="off" -->
+							<!-- 	type="text" placeholder="내용을 입력해" /> -->
 							<div class="toast-ui-editor">
 								<script type="text/x-template"></script>
 							</div>
