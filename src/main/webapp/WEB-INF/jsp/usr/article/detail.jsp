@@ -1,129 +1,106 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="DETAIL"></c:set>
 <%@ include file="../common/head.jspf"%>
 <%@ include file="../common/toastUiEditorLib.jspf"%>
 <hr />
 
-<!-- <iframe src="http://localhost:8080/usr/article/doIncreaseHitCount?id=757" frameborder="0"></iframe> -->
-<!-- 변수 -->
+<style>
+</style>
+
+
+
+<!-- 조회수 증가 -->
 <script>
-	const params = {};
-	params.id = parseInt('${param.id}');
-	params.memberId = parseInt('${loginedMemberId}')
-	
-	console.log(params);
-	console.log(params.id);
-	console.log(params.memberId);
+    const params = {};
+    params.id = parseInt('${param.id}');
+    params.memberId = parseInt('${loginedMemberId}');
+    var isAlreadyAddGoodRp = ${isAlreadyAddGoodRp};
+    var isAlreadyAddBadRp = ${isAlreadyAddBadRp};
 
-	var isAlreadyAddGoodRp = ${isAlreadyAddGoodRp};
-	var isAlreadyAddBadRp = ${isAlreadyAddBadRp};
+    function ArticleDetail__doIncreaseHitCount() {
+        const localStorageKey = 'article__' + params.id + '__alreadyOnView';
+        if (localStorage.getItem(localStorageKey)) {
+            return;
+        }
+        localStorage.setItem(localStorageKey, true);
+        $.get('../article/doIncreaseHitCountRd', {
+            id : params.id,
+            ajaxMode : 'Y'
+        }, function(data) {
+            $('.article-detail__hit-count').empty().html(data.data1);
+        }, 'json');
+    }
+
+    $(function() {
+        setTimeout(ArticleDetail__doIncreaseHitCount, 2000);
+    });
 </script>
-
-<!-- 조회수 -->
-<script>
-	function ArticleDetail__doIncreaseHitCount() {
-		const localStorageKey = 'article__' + params.id + '__alreadyOnView';
-
-		if (localStorage.getItem(localStorageKey)) {
-			return;
-		}
-
-		localStorage.setItem(localStorageKey, true);
-
-		$.get('../article/doIncreaseHitCountRd', {
-			id : params.id,
-			ajaxMode : 'Y'
-		}, function(data) {
-			console.log(data);
-			console.log(data.data1);
-			$('.article-detail__hit-count').empty().html(data.data1);
-		}, 'json')
-	}
-
-	$(function() {
-		// 		ArticleDetail__doIncreaseHitCount();
-		setTimeout(ArticleDetail__doIncreaseHitCount, 2000);
-	})
-</script>
-
 
 <section class="mt-6 text-xl px-4">
 	<div class="mx-auto max-w-screen-lg">
-		<table class="table" border="1" cellspacing="0" cellpadding="5" style="width: 100%; border-collapse: collapse;">
-			<tbody>
-				<tr>
-					<th style="text-align: center;">글 번호</th>
-					<td style="text-align: center;">${article.id}</td>
-				</tr>
-				<tr>
-					<th style="text-align: center;">작성 날짜</th>
-					<td style="text-align: center;">${article.updateDate}</td>
-				</tr>
-				<tr>
-					<th style="text-align: center;">제목</th>
-					<td style="text-align: center;">${article.title}</td>
-				</tr>
-				<tr>
-					<th style="text-align: center;">작성자</th>
-					<td style="text-align: center;">${article.extra__writer}</td>
-				</tr>
-				<!--
-				<tr>
-					<th class="reaction" style="text-align: center;">좋아요</th>
-					<td id="likeCount" style="text-align: center;">${article.goodReactionPoint}</td>
-				</tr>
-				<tr>
-					<th style="text-align: center;">싫어요</th>
-					<td id="DislikeCount" style="text-align: center;">${article.badReactionPoint}</td>
-				</tr>
-				 -->
-
-				<tr>
-					<th style="text-align: center;">좋아요 / 싫어요 ${usersReaction }</th>
-					<td style="text-align: center;">
-
-						<button id="likeButton" class="btn btn-outline btn-success" onclick="doGoodReaction(${param.id})">
-							👍 LIKE <span class="likeCount">${article.goodReactionPoint}</span>
-						</button>
-						<button id="DislikeButton" class="btn btn-outline btn-error" onclick="doBadReaction(${param.id})">
-							👎 DISLIKE <span class="DislikeCount">${article.badReactionPoint}</span>
-						</button> <%-- 						<a href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.currentUri}" --%>
-						<%-- 							class="btn btn-outline btn-success">👍 LIKE ${article.goodReactionPoint}</a> --%> <%-- 						<a href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.currentUri}" --%>
-						<%-- 							class="btn btn-outline btn-error">👎 DISLIKE ${article.badReactionPoint}</a> --%>
-					</td>
-				</tr>
-
-				<tr>
-					<th style="text-align: center;">조회수</th>
-					<td style="text-align: center;"><span class="article-detail__hit-count">${article.hitCount}</span></td>
-				</tr>
-				
-				<tr>
-					<th style="text-align: center;">이미지</th>
-					<td style="text-align: center;">
-						<div style="text-align: center;">
-							<img class="mx-auto rounded-xl" src="${rq.getImgUri(article.id)}" onerror="${rq.profileFallbackImgOnErrorHtml}"
-								alt="" />
-						</div>
-						<div>${rq.getImgUri(article.id)}</div>
-					</td>
-				</tr>
-				<tr>
-					<th style="text-align: center;">내용</th>
-					<td>
-						<div class="toast-ui-viewer">
-							<script type="text/x-template">${article.body}</script>
-						</div>
-					</td>
-				</tr>
-
-			</tbody>
+		<!-- 상단 글 정보 -->
+		<table class="table-auto" style="width: 100%;">
+			<tr>
+				<div class="post-num">
+					<td style="text-align: left;">글 번호: ${article.id}</td>
+				</div>
+				<div class="post-date">
+					<td style="text-align: right;">작성 날짜: ${article.updateDate}</td>
+				</div>
+			</tr>
 		</table>
+
+		<!-- 제목 및 작성자, 조회수 -->
+		<table class="table-auto mt-4" style="width: 100%;">
+			<tr>
+				<div class="post-name">
+					<td style="text-align: left;">제목: ${article.title}</td>
+				</div>
+
+				<div class="post-look">
+					<td style="text-align: right; color: #656565;">조회수:
+						${article.hitCount}</td>
+				</div>
+			</tr>
+			<tr>
+				<div class="post-writer">
+					<td style="text-align: left;">작성자: ${article.extra__writer}</td>
+				</div>
+			</tr>
+		</table>
+
+		<hr></hr>
+		<!-- 본문 내용 -->
+		<div class="mt-6 text-2xl">${article.body}</div>
+
+		<!-- 좋아요 / 싫어요 -->
+		<div class="mt-6 text-center">
+			<button id="likeButton" class="btn btn-outline btn-success"
+				onclick="doGoodReaction(${param.id})">
+				👍 LIKE <span class="likeCount">${article.goodReactionPoint}</span>
+			</button>
+			<button id="DislikeButton" class="btn btn-outline btn-error"
+				onclick="doBadReaction(${param.id})">
+				👎 DISLIKE <span class="DislikeCount">${article.badReactionPoint}</span>
+			</button>
+		</div>
+		
+		<div class="btns">
+			<button class="btn" type="button" onclick="history.back()">뒤로가기</button>
+			<c:if test="${article.userCanModify }">
+				<a class="btn" href="../article/modify?id=${article.id }">수정</a>
+			</c:if>
+			<c:if test="${article.userCanDelete }">
+				<a class="btn" a onclick="if(confirm('정말 삭제 하시겠습니까?') == false) return false;"
+					href="../article/doDelete?id=${article.id }">삭제</a>
+			</c:if>
+
+		</div>
+		
 	</div>
 </section>
-
-</section>
-
 
 <%@ include file="../common/foot.jspf"%>
