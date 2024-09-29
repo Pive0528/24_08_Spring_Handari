@@ -124,21 +124,27 @@ CREATE TABLE board (
 INSERT INTO board
 SET regDate = NOW(),
 updateDate = NOW(),
-`code` = 'NOTICE',
+`code` = '공지사항',
 `name` = '공지사항';
 
 INSERT INTO board
 SET regDate = NOW(),
 updateDate = NOW(),
-`code` = 'FREE',
-`name` = '자유';
-
+`code` = '자유게시판',
+`name` = '자유게시판';
 
 INSERT INTO board
 SET regDate = NOW(),
 updateDate = NOW(),
-`code` = 'QnA',
-`name` = '질의응답';
+`code` = '축제후기',
+`name` = '축제후기';
+
+INSERT INTO board
+SET regDate = NOW(),
+updateDate = NOW(),
+`code` = '분실물신고',
+`name` = '분실물신고';
+
 
 ALTER TABLE article ADD COLUMN boardId INT(10) UNSIGNED NOT NULL AFTER `memberId`;
 
@@ -153,6 +159,10 @@ WHERE id = 3;
 UPDATE article
 SET boardId = 3
 WHERE id = 4;
+
+UPDATE article
+SET boardId = 4
+WHERE id = 5;
 
 ALTER TABLE article ADD COLUMN hitCount INT(10) UNSIGNED NOT NULL DEFAULT 0 AFTER `body`;
 
@@ -279,56 +289,6 @@ relTypeCode = 'article',
 relId = 2,
 `body` = '댓글 4';
 
-# reply 테이블에 좋아요 관련 컬럼 추가
-ALTER TABLE reply ADD COLUMN goodReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 0;
-ALTER TABLE reply ADD COLUMN badReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 0;
-
-# reactionPoint 테스트 데이터 생성
-# 1번 회원이 1번 댓글에 싫어요
-INSERT INTO reactionPoint
-SET regDate = NOW(),
-updateDate = NOW(),
-memberId = 1,
-relTypeCode = 'reply',
-relId = 1,
-`point` = -1;
-
-# 1번 회원이 2번 댓글에 좋아요
-INSERT INTO reactionPoint
-SET regDate = NOW(),
-updateDate = NOW(),
-memberId = 1,
-relTypeCode = 'reply',
-relId = 2,
-`point` = 1;
-
-# 2번 회원이 1번 댓글에 싫어요
-INSERT INTO reactionPoint
-SET regDate = NOW(),
-updateDate = NOW(),
-memberId = 2,
-relTypeCode = 'reply',
-relId = 1,
-`point` = -1;
-
-# 2번 회원이 2번 댓글에 싫어요
-INSERT INTO reactionPoint
-SET regDate = NOW(),
-updateDate = NOW(),
-memberId = 2,
-relTypeCode = 'reply',
-relId = 2,
-`point` = -1;
-
-# 3번 회원이 1번 댓글에 좋아요
-INSERT INTO reactionPoint
-SET regDate = NOW(),
-updateDate = NOW(),
-memberId = 3,
-relTypeCode = 'reply',
-relId = 1,
-`point` = 1;
-
 # update join -> 기존 게시물의 good,bad RP 값을 RP 테이블에서 가져온 데이터로 채운다
 UPDATE reply AS R
 INNER JOIN (
@@ -437,8 +397,8 @@ FROM article AS A
 WHERE A.boardId = 1 AND A.memberId = 3
 ORDER BY A.id DESC;
 
-select hitCount
-from article where id = 3
+SELECT hitCount
+FROM article WHERE id = 3
 
 SELECT * FROM `reactionPoint`;
 
@@ -453,21 +413,21 @@ SELECT A.*, M.nickname AS extra__writer, RP.point
 FROM article AS A
 INNER JOIN `member` AS M
 ON A.memberId = M.id
-left join reactionPoint as RP
-on A.id = RP.relId and RP.relTypeCode = 'article'
-group by A.id
-order by A.id desc;
+LEFT JOIN reactionPoint AS RP
+ON A.id = RP.relId AND RP.relTypeCode = 'article'
+GROUP BY A.id
+ORDER BY A.id DESC;
 
 # 서브쿼리
 SELECT A.*, 
-ifnull(sum(RP.point),0) as extra__sumReactionPoint,
-IFNULL(SUM(if(RP.point > 0,RP.point,0)),0) AS extra__goodReactionPoint,
+IFNULL(SUM(RP.point),0) AS extra__sumReactionPoint,
+IFNULL(SUM(IF(RP.point > 0,RP.point,0)),0) AS extra__goodReactionPoint,
 IFNULL(SUM(IF(RP.point < 0,RP.point,0)),0) AS extra__badReactionPoint
 FROM (
-    select A.*, M.nickname as extra__writer 
-    from article as A
-    inner join `member` as M
-    on A.memberId = M.id) AS A
+    SELECT A.*, M.nickname AS extra__writer 
+    FROM article AS A
+    INNER JOIN `member` AS M
+    ON A.memberId = M.id) AS A
 LEFT JOIN reactionPoint AS RP
 ON A.id = RP.relId AND RP.relTypeCode = 'article'
 GROUP BY A.id
@@ -478,7 +438,7 @@ SELECT A.*, M.nickname AS extra__writer,
 IFNULL(SUM(RP.point),0) AS extra__sumReactionPoint,
 IFNULL(SUM(IF(RP.point > 0,RP.point,0)),0) AS extra__goodReactionPoint,
 IFNULL(SUM(IF(RP.point < 0,RP.point,0)),0) AS extra__badReactionPoint
-from article as A
+FROM article AS A
 INNER JOIN `member` AS M
 ON A.memberId = M.id
 LEFT JOIN reactionPoint AS RP
@@ -486,12 +446,13 @@ ON A.id = RP.relId AND RP.relTypeCode = 'article'
 GROUP BY A.id
 ORDER BY A.id DESC;
 
-select ifnull(sum(RP.point),0) 
-from reactionPoint as RP
-where RP.relTypeCode = 'article'
-and RP.relId = 3
-and RP.memberId = 1;
+SELECT IFNULL(SUM(RP.point),0) 
+FROM reactionPoint AS RP
+WHERE RP.relTypeCode = 'article'
+AND RP.relId = 3
+AND RP.memberId = 1;
 
+/*
 
 
 -- Remove the existing 4 test articles
