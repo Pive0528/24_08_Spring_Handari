@@ -327,59 +327,88 @@ function doModifyReply(replyId) {
 }
 </script> -->
 <section class="mt-10 text-xl px-4 mx-auto max-w-screen-lg">
-	<!-- 댓글 리스트 -->
-	<div class="mx-auto">
-		<table class="table" border="1" cellspacing="0" cellpadding="5"
-			style="width: 100%; border-collapse: collapse;">
-			<tbody>
-				<c:forEach var="reply" items="${replies}">
-					<tr>
-						<td style="text-align: left; width: 150px;">${reply.extra__writer}</td>
-						<td style="text-align: left;">${reply.body}</td>
-						<td style="text-align: right; width: 150px;">${reply.regDate.substring(0,16)}</td>
-						<c:if test="${reply.userCanDelete }">
-							<td style="text-align: right; width: 100px;"><a
-								class="btn btn-outline btn-xs btn-error"
-								onclick="if(confirm('정말 삭제?') == false) return false;"
-								href="/usr/reply/doDelete?id=${reply.id }">삭제</a></td>
-						</c:if>
-					</tr>
-				</c:forEach>
-				<c:if test="${empty replies}">
-					<tr>
-						<td colspan="3" style="text-align: center;">댓글이 없습니다</td>
-					</tr>
-				</c:if>
-			</tbody>
-			<c:if test="${rq.isLogined() }">
-				<form action="../reply/doWrite" method="POST"
-					onsubmit="ReplyWrite__submit(this); return false;">
-					<table class="table" border="1" cellspacing="0" cellpadding="5"
-						style="width: 100%; border-collapse: collapse;">
-						<input type="hidden" name="relTypeCode" value="article" />
-						<input type="hidden" name="relId" value="${article.id }" />
-						<tbody>
-							<tr>
-								<th>댓글 내용 입력</th>
-								<td style="text-align: center;"><textarea
-										class="input input-bordered input-sm w-full max-w-xs"
-										name="body" autocomplete="off" placeholder="내용을 입력해"></textarea>
-								</td>
-								<td style="text-align: center;">
-									<button class="btn btn-outline">작성</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</form>
-			</c:if>
-			<c:if test="${!rq.isLogined() }">
-        댓글 작성을 위해 <a class="btn btn-outline btn-primary"
-					href="${rq.loginUri }">로그인</a>이 필요합니다
+    <!-- 댓글 수 표시 -->
+    <div class="mb-4">
+        <h2 class="text-lg font-bold">댓글 ${replies.size()}</h2>
+    </div>
+
+    <!-- 댓글 리스트 -->
+    <div class="mx-auto">
+        <table class="table" border="0" cellspacing="0" cellpadding="10"
+            style="width: 100%; border-collapse: collapse;">
+            <tbody>
+                <c:forEach var="reply" items="${replies}">
+                    <tr>
+                        <!-- 작성자와 작성 날짜 -->
+                        <td colspan="2" style="text-align: left;"><span
+                            style="font-weight: bold;">${reply.extra__writer}</span> <span
+                            style="color: #999; margin-left: 10px;">${reply.regDate.substring(0,16)}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <!-- 댓글 내용 및 삭제 버튼 -->
+                        <td style="text-align: left; width: 100%;">${reply.body}</td>
+                        <c:if test="${reply.userCanDelete}">
+                            <td style="text-align: right;"><a
+                                class="btn btn-outline btn-error"
+                                style="font-size: 12px; border-radius: 5px; white-space: nowrap;"
+                                onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;"
+                                href="/usr/reply/doDelete?id=${reply.id}"> 삭제 </a></td>
+                        </c:if>
+                    </tr>
+                </c:forEach>
+                <!-- 댓글이 없을 때 표시 -->
+                <c:if test="${empty replies}">
+                    <tr>
+                        <td colspan="2" style="text-align: center;">댓글이 없습니다</td>
+                    </tr>
+                </c:if>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 댓글 입력 폼 -->
+    <c:if test="${rq.isLogined()}">
+        <form id="replyForm" action="../reply/doWrite" method="POST" class="mt-5">
+            <div style="border: 1px solid #ddd; padding: 15px; border-radius: 5px;">
+                <input type="hidden" name="relTypeCode" value="article" /> 
+                <input type="hidden" name="relId" value="${article.id}" />
+
+                <!-- 댓글 입력 -->
+                <textarea id="commentInput" class="input input-bordered w-full"
+                    name="body" autocomplete="off" placeholder="댓글 내용을 입력해주세요."
+                    style="height: 80px; width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"
+                    onkeydown="submitOnEnter(event)"></textarea>
+
+                <!-- 작성 버튼 -->
+                <div style="text-align: right; margin-top: 10px;">
+                    <button type="submit" class="btn btn-outline btn-primary">댓글 등록</button>
+                </div>
+            </div>
+        </form>
     </c:if>
-		</table>
-	</div>
+
+    <!-- 로그인 유도 -->
+    <c:if test="${!rq.isLogined()}">
+        <div style="margin-top: 20px; text-align: center;">
+            댓글 작성을 위해 <a href="${rq.loginUri}"
+                class="btn btn-outline btn-primary">로그인</a>이 필요합니다.
+        </div>
+    </c:if>
 </section>
+
+<!-- JavaScript for Enter Key Submission -->
+<script>
+    function submitOnEnter(event) {
+        if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault();  // Prevent new line
+            document.getElementById('replyForm').submit();  // Trigger form submission
+        }
+    }
+</script>
+
+
+
 
 
 <%@ include file="../common/foot.jspf"%>
