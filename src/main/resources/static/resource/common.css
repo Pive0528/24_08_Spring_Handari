@@ -40,16 +40,16 @@ html>body {
 	color: #000;
 }
 
-
 /* 전체 헤더 스타일 */
 header {
-    position: relative;
+    position: relactive;
     width: 100%;
     height: 100px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
+    z-index: 1000;
     
 }
 

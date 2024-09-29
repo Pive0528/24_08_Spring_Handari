@@ -42,29 +42,32 @@ public class UsrReplyController {
 
 		return Ut.jsReplace(writeReplyRd.getResultCode(), writeReplyRd.getMsg(), "../article/detail?id=" + relId);
 	}
-
-	@RequestMapping("/usr/reply/doModify")
+	
+	@RequestMapping("/usr/reply/doDelete")
 	@ResponseBody
-	public String doModify(HttpServletRequest req, int id, String body) {
-		System.err.println(id);
-		System.err.println(body);
-		Rq rq = (Rq) req.getAttribute("rq");
+	public String doDelete(int id, HttpServletRequest req) {
+	    Rq rq = (Rq) req.getAttribute("rq");
 
-		Reply reply = replyService.getReply(id);
+	    // Get the reply by its ID
+	    Reply reply = replyService.getReply(id);
 
-		if (reply == null) {
-			return Ut.jsHistoryBack("F-1", Ut.f("%d번 댓글은 존재하지 않습니다", id));
-		}
+	    if (reply == null) {
+	        return Ut.jsHistoryBack("F-1", "존재하지 않는 댓글입니다.");
+	    }
 
-		ResultData loginedMemberCanModifyRd = replyService.userCanModify(rq.getLoginedMemberId(), reply);
+	    // Assuming the author can delete their own reply
+	    if (reply.getMemberId() != rq.getLoginedMemberId()) {
+	        return Ut.jsHistoryBack("F-2", "댓글을 삭제할 권한이 없습니다.");
+	    }
 
-		if (loginedMemberCanModifyRd.isSuccess()) {
-			replyService.modifyReply(id, body);
-		}
+	    // Delete the reply
+	    replyService.deleteReply(id);
 
-		reply = replyService.getReply(id);
-
-		return reply.getBody();
+	    return Ut.jsReplace("S-1", "댓글이 삭제되었습니다.", "../article/detail?id=" + reply.getRelId());
 	}
+
+	
+	
+	
 
 }
