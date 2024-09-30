@@ -48,6 +48,7 @@
 								<option value="1">공지사항</option>
 								<option value="2">자유게시판</option>
 								<option value="3">축제후기</option>
+								<option value="4">분실물신고</option>
 						</select></td>
 
 					</tr>
