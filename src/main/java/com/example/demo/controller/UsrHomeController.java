@@ -10,6 +10,12 @@ public class UsrHomeController {
 	public String showMain() {
 		return "/usr/home/main";
 	}
+	
+	@RequestMapping("/usr/home/siteintro")
+	public String showIntro() {
+		return "/usr/home/siteintro";
+	}
+	
 
 	@RequestMapping("/")
 	public String showRoot() {
