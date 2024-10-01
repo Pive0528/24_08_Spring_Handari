@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="글 상세보기"></c:set>
@@ -271,52 +270,18 @@ function doBadReaction(articleId) {
 		checkRP();
 	});
 </script>
-<!-- 댓글 수정 -->
-<!-- <script>
-function toggleModifybtn(replyId) {
-	
-	console.log(replyId);
-	
-	$('#modify-btn-'+replyId).hide();
-	$('#save-btn-'+replyId).show();
-	$('#reply-'+replyId).hide();
-	$('#modify-form-'+replyId).show();
-}
-function doModifyReply(replyId) {
-	 console.log(replyId); // 디버깅을 위해 replyId를 콘솔에 출력
-	    
-	    // form 요소를 정확하게 선택
-	    var form = $('#modify-form-' + replyId);
-	    console.log(form); // 디버깅을 위해 form을 콘솔에 출력
-	    // form 내의 input 요소의 값을 가져옵니다
-	    var text = form.find('input[name="reply-text-' + replyId + '"]').val();
-	    console.log(text); // 디버깅을 위해 text를 콘솔에 출력
-	    // form의 action 속성 값을 가져옵니다
-	    var action = form.attr('action');
-	    console.log(action); // 디버깅을 위해 action을 콘솔에 출력
-	
-    $.post({
-    	url: '/usr/reply/doModify', // 수정된 URL
-        type: 'POST', // GET에서 POST로 변경
-        data: { id: replyId, body: text }, // 서버에 전송할 데이터
-        success: function(data) {
-        	$('#modify-form-'+replyId).hide();
-        	$('#reply-'+replyId).text(data);
-        	$('#reply-'+replyId).show();
-        	$('#save-btn-'+replyId).hide();
-        	$('#modify-btn-'+replyId).show();
-        },
-        error: function(xhr, status, error) {
-            alert('댓글 수정에 실패했습니다: ' + error);
-        }
-	})
-}
-</script> -->
+</script>
 <section class="mt-10 text-xl px-4 mx-auto max-w-screen-lg">
 	<!-- 댓글 수 표시 -->
 	<div class="mb-4">
 		<h2 class="text-lg font-bold">댓글 ${replies.size()}</h2>
 	</div>
+	<!-- 댓글이 없을 때 표시 -->
+				<c:if test="${empty replies}">
+					<tr>
+						<td colspan="2" style="text-align: center;">댓글이 없습니다</td>
+					</tr>
+				</c:if>
 
 	<!-- 댓글 리스트 -->
 	<div class="mx-auto">
@@ -338,44 +303,36 @@ function doModifyReply(replyId) {
 						</c:if>
 					</tr>
 				</c:forEach>
-				<!-- 댓글이 없을 때 표시 -->
-				<c:if test="${empty replies}">
-					<tr>
-						<td colspan="2" style="text-align: center;">댓글이 없습니다</td>
-					</tr>
-				</c:if>
+				
 			</tbody>
-		</table>
-	</div>
+			<!-- 댓글 입력 폼 -->
+			<c:if test="${rq.isLogined()}">
+				<form id="replyForm" action="../reply/doWrite" method="POST" class="mt-5">
+					<div style="border: 1px solid #ddd; padding: 15px; border-radius: 5px;">
+						<input type="hidden" name="relTypeCode" value="article" /> <input type="hidden" name="relId"
+							value="${article.id}" />
 
-	<!-- 댓글 입력 폼 -->
-	<c:if test="${rq.isLogined()}">
-		<form id="replyForm" action="../reply/doWrite" method="POST" class="mt-5">
-			<div style="border: 1px solid #ddd; padding: 15px; border-radius: 5px;">
-				<input type="hidden" name="relTypeCode" value="article" /> <input type="hidden" name="relId" value="${article.id}" />
+						<!-- 댓글 입력 -->
+						<textarea id="commentInput" class="input input-bordered w-full" name="body" autocomplete="off"
+							placeholder="댓글 내용을 입력해주세요."
+							style="height: 80px; width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"
+							onkeydown="submitOnEnter(event)"></textarea>
 
-				<!-- 댓글 입력 -->
-				<textarea id="commentInput" class="input input-bordered w-full" name="body" autocomplete="off"
-					placeholder="댓글 내용을 입력해주세요."
-					style="height: 80px; width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"
-					onkeydown="submitOnEnter(event)"></textarea>
+						<!-- 작성 버튼 -->
+						<div style="text-align: right; margin-top: 10px;">
+							<button type="submit" class="btn btn-outline btn-primary">댓글 등록</button>
+						</div>
+					</div>
+				</form>
+			</c:if>
 
-				<!-- 작성 버튼 -->
-				<div style="text-align: right; margin-top: 10px;">
-					<button type="submit" class="btn btn-outline btn-primary">댓글 등록</button>
+			<!-- 로그인 유도 -->
+			<c:if test="${!rq.isLogined()}">
+				<div style="margin-top: 20px; text-align: center;">
+					댓글 작성을 위해 <a href="${rq.loginUri}" class="btn btn-outline btn-primary">로그인</a>이 필요합니다.
 				</div>
-			</div>
-		</form>
-	</c:if>
-
-	<!-- 로그인 유도 -->
-	<c:if test="${!rq.isLogined()}">
-		<div style="margin-top: 20px; text-align: center;">
-			댓글 작성을 위해 <a href="${rq.loginUri}" class="btn btn-outline btn-primary">로그인</a>이 필요합니다.
-		</div>
-	</c:if>
+			</c:if>
 </section>
-
 <!-- JavaScript for Enter Key Submission -->
 <script>
     function submitOnEnter(event) {
@@ -387,6 +344,21 @@ function doModifyReply(replyId) {
 </script>
 
 
+<script>
+	function ReplyWrite__submit(form) {
+		console.log(form.body.value);
+		
+		form.body.value = form.body.value.trim();
+		
+		/* if(form.body.value.length < 3){
+			alert('3글자 이상 입력해');
+			form.body.focus();
+			return;
+		} */
+		
+		form.submit();
+	}
+</script>
 
 
 

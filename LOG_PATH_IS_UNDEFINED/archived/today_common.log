@@ -1,1 +1,6 @@
+<<<<<<< HEAD
 2024-09-30 09:49:05 [DEBUG] o.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+=======
+2024-09-29 23:37:46 [DEBUG] o.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+>>>>>>> ef81f033edd23219255d15bff4c2d8e11a77c783
+2024-10-01 08:59:48 [DEBUG] o.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.

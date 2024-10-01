@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="pageTitle" value="CHECKPW"></c:set>
+<c:set var="pageTitle" value="비밀번호 확인"></c:set>
 <%@ include file="../common/head.jspf"%>
 <hr />
 
@@ -18,7 +18,7 @@
 						<th>비밀번호</th>
 						<td style="text-align: center;">
 							<input class="input input-bordered input-primary input-sm w-full max-w-xs" name="loginPw" autocomplete="off"
-								type="text" placeholder="비밀번호를 입력해" />
+								type="text" placeholder="비밀번호를 입력해주세요." />
 						</td>
 
 					</tr>
