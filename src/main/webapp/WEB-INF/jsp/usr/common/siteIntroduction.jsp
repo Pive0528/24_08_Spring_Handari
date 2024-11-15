@@ -10,6 +10,21 @@
 </head>
 <body>
     <div class="container">
+<<<<<<< HEAD
+=======
+        <header>
+            <img src="path_to_header_logo.png" alt="Handari Logo">
+            <nav>
+                <ul>
+                    <li><a href="/">홈</a></li>
+                    <li><a href="/board/notice">공지사항</a></li>
+                    <li><a href="/board/free">자유게시판</a></li>
+                    <li><a href="/siteIntroduction">사이트소개</a></li>
+                    <!-- Add other links as needed -->
+                </ul>
+            </nav>
+        </header>
+>>>>>>> f5b831dc366fdeed5f23aef9699e70557c2064c5
 
         <main>
             <h1>한다리 사이트는?</h1>

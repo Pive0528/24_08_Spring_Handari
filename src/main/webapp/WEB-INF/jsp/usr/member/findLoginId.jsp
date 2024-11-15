@@ -23,7 +23,7 @@
 	}
 </script>
 
-<section class="mt-24 text-xl px-4"">
+<section class="mt-24 text-xl px-4">
 	<div class="mx-auto max-w-screen-lg">
 		<form action="../member/doFindLoginId" method="POST" onsubmit="MemberFindLoginId__submit(this);">
 			<input type="hidden" name="afterFindLoginIdUri" value="${param.afterFindLoginIdUri }" />
