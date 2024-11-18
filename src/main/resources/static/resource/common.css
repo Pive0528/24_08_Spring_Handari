@@ -70,11 +70,11 @@
 }
 
 .festivals-top10-section {
-    display: flex;
-    justify-content: space-between;
-    width: 80%;
-    margin-top: 40px;
-    text-align: center;
+    display: flex; /* Side-by-side layout */
+    justify-content: space-between; /* Even spacing between the two sections */
+    gap: 20px; /* Space between the two sections */
+    margin-top: 20px; /* Top margin for the container */
+    align-items: flex-start; /* Align the top edges of both sections */
 }
 
 .side-content {
@@ -121,4 +121,97 @@
     text-align: right;
     font-size: 12px;
     color: #007BFF;
+}
+.festival-section {
+    width: 100%;
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 6%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+    margin-bottom: 10px;
+    border:0.5px whitesmoke solid;
+}
+
+.festival-section h2 {
+    font-family: 'Jeju Myeongjo', serif;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 10px; /* 제목과 테이블 사이 간격 */
+}
+
+.festival-table {
+    width: 100%;
+    border-collapse: separate; /* 셀 간격 활성화 */
+    border-spacing: 0 8px; /* 행 간격 추가 */
+}
+
+.festival-table th {
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center; /* 헤더 텍스트 가운데 정렬 */
+}
+
+.festival-table td {
+    text-align: center; /* 각 항목 가운데 정렬 */
+    vertical-align: middle; /* 세로 가운데 정렬 */
+    font-size: 14px;
+    padding: 0px 15px; /* 셀 내부 간격 추가 (축제명과 종료일 사이 여백 확보) */
+}
+
+/* 순번 스타일 */
+.festival-table td:first-child {
+    font-weight: bold;
+    background-color: #333; /* 시작 색상 */
+    color: white;
+    border-radius: 15px; /* 직사각형 모서리 둥글게 */
+    text-align: center;
+}
+
+/* 순번 색상 점진적 변화 */
+.festival-table tr:nth-child(1) td:first-child {
+    background-color: #333;
+}
+.festival-table tr:nth-child(2) td:first-child {
+    background-color: #555;
+}
+.festival-table tr:nth-child(3) td:first-child {
+    background-color: #777;
+}
+.festival-table tr:nth-child(4) td:first-child {
+    background-color: #999;
+}
+.festival-table tr:nth-child(5) td:first-child {
+    background-color: #aaa;
+}
+.festival-table tr:nth-child(6) td:first-child {
+    background-color: #bbb;
+}
+.festival-table tr:nth-child(7) td:first-child {
+    background-color: #ccc;
+}
+.festival-table tr:nth-child(8) td:first-child {
+    background-color: #ddd;
+}
+.festival-table tr:nth-child(9) td:first-child {
+    background-color: #eee;
+}
+.festival-table tr:nth-child(10) td:first-child {
+    background-color: #f1f1f1;
+}
+
+/* D-Day 스타일 */
+.festival-table td:last-child {
+    background-color: #757575; /* 회색 배경 */
+    color: white; /* 흰색 텍스트 */
+    border-radius: 5px; /* 둥근 모서리 */
+    text-align: center;
+    font-size: 12px;
+    padding: 0px 10px; /* 내부 여백 */
+    width: 58px; /* 고정된 너비 */
+}
+
+/* 제목과 테이블 간 여백 */
+.festival-section h2 + .festival-table {
+    margin-top: 20px; /* 제목과 테이블 사이 분리 */
 }

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<link rel="icon" type="image/png" href="https://i.ibb.co/0Kt4sYn/22.png">
+
 <head>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/head.css">
 </head>
@@ -75,7 +77,7 @@
                 src="https://i.ibb.co/0Kt4sYn/22.png" width="160"/>
         </a>
         <div class="flex-grow"></div>
-        <ul class="flex" style="font-size: 18px; font-weight: bold;">
+        <ul class="flex-header" style="font-size: 18px; font-weight: bold;">
             <form action="#" method="GET"
                   style="display: inline-flex; align-items: center;">
 

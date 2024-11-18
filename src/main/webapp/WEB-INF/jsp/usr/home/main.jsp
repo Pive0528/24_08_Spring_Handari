@@ -3,7 +3,6 @@
 <c:set var="pageTitle" value="메인화면"></c:set>
 <%@ include file="../common/head.jspf" %>
 <%@ page import="java.util.Calendar" %>
-
 <hr/>
 
 
@@ -32,9 +31,11 @@
 
     <!-- Background image with content inside -->
     <div class="background-image-section" style="background-image: url('<%= imageUrl %>');">
+        <!-- 텍스트 오버레이 -->
         <div class="text-overlay"><%= textOverlay %>
         </div>
-
+<!-- Weather.jsp 포함 -->
+        <jsp:include page="./Weather.jsp"/>
         <!-- Right-hand side content within the background image -->
         <div class="side-content-overlay">
             <!-- Notice Section -->
@@ -52,7 +53,7 @@
                     </c:forEach>
                 </ul>
                 <div class="more-link">
-                    <a href="../article/list?boardId=1">더보기 -></a>
+                    <a href="../article/list?boardId=1">바로가기 -></a>
                 </div>
             </div>
 
@@ -71,13 +72,23 @@
                     </c:forEach>
                 </ul>
                 <div class="more-link">
-                    <a href="../article/list?boardId=3">더보기 -></a>
+                    <a href="../article/list?boardId=3">바로가기 -></a>
                 </div>
             </div>
+        </div>
 
-
+    </div>
+    <div class="festivals-top10-section">
+        <div class="ongoing-festival">
+            <c:import url="ongoingfes.jsp"/>
+        </div>
+        <div class="upcoming-festival">
+            <c:import url="upcomingfes.jsp"/>
         </div>
     </div>
+
+</div>
+</div>
 </div>
 
 <%@ include file="../common/foot.jspf" %>

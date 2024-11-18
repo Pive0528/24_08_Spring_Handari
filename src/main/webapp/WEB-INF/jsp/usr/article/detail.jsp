@@ -32,36 +32,6 @@
         ArticleDetail__doIncreaseHitCount();
     });
 </script>
-
-<!-- 조회수 증가(복잡) -->
-<!-- <script>
-    const params = {};
-    params.id = parseInt('${param.id}');
-    params.memberId = parseInt('${loginedMemberId}');
-    var isAlreadyAddGoodRp = ${isAlreadyAddGoodRp};
-    var isAlreadyAddBadRp = ${isAlreadyAddBadRp};
-
-    function ArticleDetail__doIncreaseHitCount() {
-        const localStorageKey = 'article__' + params.id + '__alreadyOnView';
-        if (localStorage.getItem(localStorageKey)) {
-            return;
-        }
-        localStorage.setItem(localStorageKey, true);
-        $.get('../article/doIncreaseHitCountRd', {
-            id : params.id,
-            ajaxMode : 'Y'
-        }, function(data) {
-            $('.article-detail__hit-count').empty().html(data.data1);
-        }, 'json');
-    }
-
-    $(function() {
-        setTimeout(ArticleDetail__doIncreaseHitCount, 2000);
-    });
-</script> -->
-
-
-
 <section class="mt-6 text-xl px-4">
 	<div class="mx-auto max-w-screen-lg">
 		<!-- 상단 글 정보 -->
@@ -268,47 +238,6 @@ function doBadReaction(articleId) {
 		checkRP();
 	});
 </script>
-<!-- 댓글 수정 -->
-<!-- <script>
-function toggleModifybtn(replyId) {
-	
-	console.log(replyId);
-	
-	$('#modify-btn-'+replyId).hide();
-	$('#save-btn-'+replyId).show();
-	$('#reply-'+replyId).hide();
-	$('#modify-form-'+replyId).show();
-}
-function doModifyReply(replyId) {
-	 console.log(replyId); // 디버깅을 위해 replyId를 콘솔에 출력
-	    
-	    // form 요소를 정확하게 선택
-	    var form = $('#modify-form-' + replyId);
-	    console.log(form); // 디버깅을 위해 form을 콘솔에 출력
-	    // form 내의 input 요소의 값을 가져옵니다
-	    var text = form.find('input[name="reply-text-' + replyId + '"]').val();
-	    console.log(text); // 디버깅을 위해 text를 콘솔에 출력
-	    // form의 action 속성 값을 가져옵니다
-	    var action = form.attr('action');
-	    console.log(action); // 디버깅을 위해 action을 콘솔에 출력
-	
-    $.post({
-    	url: '/usr/reply/doModify', // 수정된 URL
-        type: 'POST', // GET에서 POST로 변경
-        data: { id: replyId, body: text }, // 서버에 전송할 데이터
-        success: function(data) {
-        	$('#modify-form-'+replyId).hide();
-        	$('#reply-'+replyId).text(data);
-        	$('#reply-'+replyId).show();
-        	$('#save-btn-'+replyId).hide();
-        	$('#modify-btn-'+replyId).show();
-        },
-        error: function(xhr, status, error) {
-            alert('댓글 수정에 실패했습니다: ' + error);
-        }
-	})
-}
-</script> -->
 <section class="mt-10 text-xl px-4 mx-auto max-w-screen-lg">
 	<!-- 댓글 수 표시 -->
 	<div class="mb-4">
