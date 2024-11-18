@@ -14,13 +14,13 @@
         String imageUrl = "";
         String textOverlay = "";
 
-        if (month >= 8 && month <= 10) {
+        if (month >= 9 && month <= 11) {
             imageUrl = "https://i.ibb.co/1b1nYgT/image-1.png";
             textOverlay = "가을의 첫 단풍을 볼 수 있는 곳, 설악산";
-        } else if (month >= 5 && month <= 7) {
+        } else if (month >= 6 && month <= 8) {
             imageUrl = "https://i.ibb.co/NYyYGTK/image-2.png";
             textOverlay = "뜨거운 태양 아래 시원한 바람이 반가운 계절.";
-        } else if (month >= 2 && month <= 4) {
+        } else if (month >= 3 && month <= 5) {
             imageUrl = "https://i.ibb.co/7tHzkxN/image-1.png";
             textOverlay = "싱그러운 벚꽃이 피는 계절.";
         } else {
