@@ -5,7 +5,7 @@
 
 <%
     String city = request.getParameter("city") != null ? request.getParameter("city") : "Daejeon";
-    String apiKey = "2b62a46be3f92ad9414c7c6d8a36433c";
+    String apiKey = "";
     String apiUrl = String.format("https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s&units=metric&mode=xml", city, apiKey);
 
     String cityName = "Unknown";
